@@ -68,7 +68,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
             <Badge variant="glass-static" className="!bg-white/80 !text-slate-900">
               {typeLabels[property.type]}
             </Badge>
-            <Badge variant={property.status === "available" ? "filled-static" : "outlined-static"}>
+            <Badge variant={property.status === "available" ? "filled-static" : "glass-static"}>
               {statusLabels[property.status]}
             </Badge>
           </div>

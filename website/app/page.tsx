@@ -54,17 +54,17 @@ export default function Home() {
         <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.1)_1px,transparent_1px)] [background-size:60px_60px]" />
 
         <Container className="relative z-10 text-center">
-          <Badge variant="glass-static" className="mb-6 text-sm tracking-wider uppercase px-4 py-2">
-            {lang === "ru" ? "Недвижимость в " + city.name.ru : "Real Estate in " + city.name.en}
+          <Badge variant="glass-static" className="mb-6 text-sm tracking-wider px-4 py-2">
+            {lang === "ru" ? "Недвижимость в г. " + city.name.ru : "Real Estate in " + city.name.en}
           </Badge>
-          <h1 className="text-display-1 font-bold leading-[1.05] max-w-3xl mx-auto">
+          <h1 className="text-display-2 sm:text-display-1 font-bold leading-[1.05] max-w-3xl mx-auto">
             {lang === "ru" ? (
               <>Найдите свою<br />идеальную квартиру</>
             ) : (
               <>Find your<br />perfect apartment</>
             )}
           </h1>
-          <p className="mt-4 text-body-2 text-muted-foreground max-w-xl mx-auto">
+          <p className="mt-4 text-body-3 sm:text-body-2 text-muted-foreground max-w-xl mx-auto">
             {lang === "ru"
               ? "Более 500 проверенных объектов в 4 городах России. От студий до пентхаусов."
               : "Over 500 verified properties in 4 cities across Russia. From studios to penthouses."}
@@ -78,7 +78,7 @@ export default function Home() {
             </Button>
             <Button variant="outlined" size="large" shape="round" asChild>
               <Link href="/mortgage">
-                {lang === "ru" ? "Ипотека" : "Mortgage"}
+                {lang === "ru" ? "Ипотека от 5мин." : "Mortgage from 5min."}
               </Link>
             </Button>
           </div>
