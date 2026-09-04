@@ -1,5 +1,6 @@
 "use client"
 
+import { Footer } from "@/components/layout/nav/footer";
 import "./globals.css";
 import Header from "@/components/layout/nav/header";
 import { Toaster } from "@/components/ui/sonner";
@@ -19,6 +20,7 @@ export default function ClientRootLayout({
       <main className={cn(pathname == '/' ? "mt-0" : "mt-0", "mb-0")}>
         {children}
       </main>
+      <Footer />
       <Toaster
         position="bottom-right"
         closeButton

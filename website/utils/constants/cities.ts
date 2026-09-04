@@ -4,8 +4,11 @@ export interface City {
   name: { en: string; ru: string };
   region: { en: string; ru: string };
   description: { en: string; ru: string };
-  image: string;
-  video: string;
+  image?: {
+    src: string,
+    alt?: string,
+  }
+  video?: string;
   propertiesCount: number;
   neighborhoods: { en: string; ru: string }[];
   stats: {
@@ -25,7 +28,10 @@ export const cities: City[] = [
       en: "The capital of Russia with the most dynamic real estate market. From elite residential complexes to affordable family housing.",
       ru: "Столица России с самым динамичным рынком недвижимости. От элитных жилых комплексов до доступного семейного жилья."
     },
-    image: "/images/cities/moscow.jpg",
+    image: {
+      src: "/images/moscow.webp",
+      alt: "https://view-photo.ru/foto-zimnej-moskvy-raznyh-let/",
+    },
     video: "/videos/moscow.webm",
     propertiesCount: 250,
     neighborhoods: [
@@ -50,7 +56,10 @@ export const cities: City[] = [
       en: "The capital of Tatarstan — a fast-growing city with excellent infrastructure and affordable housing.",
       ru: "Столица Татарстана — быстрорастущий город с отличной инфраструктурой и доступным жильём."
     },
-    image: "/images/cities/kazan.jpg",
+    image: {
+      src: "/images/kazan.webp",
+      alt: "https://www.moneytimes.ru/articles/kazan-city-guide/115644/",
+    },
     video: "/videos/kazan.webm",
     propertiesCount: 80,
     neighborhoods: [
@@ -74,7 +83,10 @@ export const cities: City[] = [
       en: "The cultural capital of Russia. Unique architecture, prestigious addresses, and modern residential complexes.",
       ru: "Культурная столица России. Уникальная архитектура, престижные адреса и современные жилые комплексы."
     },
-    image: "/images/cities/spb.jpg",
+    image: {
+      src: "/images/spb.webp",
+      alt: "https://www.pravda.ru/news/travel/2343061-petersburg-tours-2026-guide/",
+    },
     video: "/videos/spb.webm",
     propertiesCount: 150,
     neighborhoods: [
@@ -98,7 +110,10 @@ export const cities: City[] = [
       en: "The resort capital of Russia. Premium seaside properties and investment opportunities.",
       ru: "Курортная столица России. Премиальная недвижимость у моря и инвестиционные возможности."
     },
-    image: "/images/cities/sochi.jpg",
+    image: {
+      src: "/images/sochi.webp",
+      alt: "https://www.pravda.ru/news/travel/2384446-sochi-crimea-group-travel-trends/",
+    },
     video: "/videos/sochi.webm",
     propertiesCount: 60,
     neighborhoods: [

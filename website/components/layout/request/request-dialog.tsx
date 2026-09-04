@@ -16,13 +16,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { PhoneInputField } from "@/components/ui/phone-input";
+import { useLanguage } from "@/providers/language-provider";
 import { $fetch } from "@/utils/fetch";
 
 const requestSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
   phone: z.string().min(1, "Phone is required"),
-  propertyId: z.string().optional(),
-  message: z.string().optional(),
+  telegram: z.string().max(100).optional().or(z.literal("")),
 });
 
 interface RequestDialogProps {
@@ -32,10 +32,11 @@ interface RequestDialogProps {
 }
 
 export function RequestDialog({ children, propertyId, propertyTitle }: RequestDialogProps) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
+  const [telegram, setTelegram] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -44,7 +45,7 @@ export function RequestDialog({ children, propertyId, propertyTitle }: RequestDi
     setErrors({});
     setLoading(true);
 
-    const result = requestSchema.safeParse({ name, phone, propertyId });
+    const result = requestSchema.safeParse({ name, phone, telegram });
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
       result.error.issues.forEach((issue) => {
@@ -62,25 +63,25 @@ export function RequestDialog({ children, propertyId, propertyTitle }: RequestDi
         body: JSON.stringify({
           name: result.data.name,
           phone: result.data.phone,
-          property_id: result.data.propertyId || null,
-          message: message || null,
+          telegram: result.data.telegram || null,
+          property_id: propertyId || null,
         }),
         headers: { "Content-Type": "application/json" },
         isToast: false,
       });
 
       if (res.response?.ok) {
-        toast.success("Request submitted successfully");
+        toast.success(t("request.success"));
         setOpen(false);
         setName("");
         setPhone("");
-        setMessage("");
+        setTelegram("");
       } else {
-        const messageText = res.json?.message || "Something went wrong";
+        const messageText = res.json?.message || t("request.error");
         toast.error(messageText);
       }
     } catch {
-      toast.error("Network error. Please try again.");
+      toast.error(t("request.networkError"));
     } finally {
       setLoading(false);
     }
@@ -92,27 +93,23 @@ export function RequestDialog({ children, propertyId, propertyTitle }: RequestDi
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {propertyTitle ? `Request ${propertyTitle}` : "Make a Request"}
+            {propertyTitle ? `${t("request.title")} — ${propertyTitle}` : t("request.title")}
           </DialogTitle>
-          <DialogDescription>
-            {propertyTitle
-              ? "We'll arrange a viewing and share all details."
-              : "We will contact you within 1 business day."}
-          </DialogDescription>
+          <DialogDescription>{t("request.subtitle")}</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Field>
-            <FieldLabel>Name</FieldLabel>
+            <FieldLabel>{t("request.name")} *</FieldLabel>
             <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
+              placeholder={t("request.namePlaceholder")}
               aria-invalid={!!errors.name}
             />
             <FieldError errors={errors.name ? [{ message: errors.name }] : []} />
           </Field>
           <Field>
-            <FieldLabel>Phone</FieldLabel>
+            <FieldLabel>{t("request.phone")} *</FieldLabel>
             <PhoneInputField
               value={phone}
               onChange={setPhone}
@@ -120,16 +117,18 @@ export function RequestDialog({ children, propertyId, propertyTitle }: RequestDi
             />
           </Field>
           <Field>
-            <FieldLabel>Message (optional)</FieldLabel>
+            <FieldLabel>Telegram</FieldLabel>
             <Input
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Any questions?"
+              value={telegram}
+              onChange={(e) => setTelegram(e.target.value)}
+              placeholder="@username"
+              aria-invalid={!!errors.telegram}
             />
+            <FieldError errors={errors.telegram ? [{ message: errors.telegram }] : []} />
           </Field>
           <DialogFooter>
             <Button type="submit" disabled={loading} className="w-full">
-              {loading ? "Submitting..." : "Submit Request"}
+              {loading ? t("request.submitting") : t("request.submit")}
             </Button>
           </DialogFooter>
         </form>
