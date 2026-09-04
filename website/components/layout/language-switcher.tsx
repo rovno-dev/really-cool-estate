@@ -12,7 +12,11 @@ import { useLanguage } from "@/providers/language-provider";
 import { GlobeIcon, CheckIcon, CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
-export function LanguageSwitcher() {
+export interface LanguageSwitcherProps {
+  className?: string;
+}
+
+export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const { lang, setLang } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
@@ -28,7 +32,7 @@ export function LanguageSwitcher() {
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className={className}>
         <button
           className={cn(
             "group flex items-center gap-1.5 rounded-full border border-(--outline) bg-(--card) px-3 h-9 text-sm font-medium transition-all duration-200",

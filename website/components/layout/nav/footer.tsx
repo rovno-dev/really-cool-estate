@@ -65,6 +65,9 @@ export function Footer() {
           <p className="text-xs text-muted-foreground">
             © {year} Realty Pro. {new Date().getFullYear() === 2026 ? "All rights reserved." : "All rights reserved."}
           </p>
+          <Link href={'https://amorfa.unidoka.com'}>
+            <img src="/made-on-amorfa-badge-v0.svg" alt="amorfa-badge" />
+          </Link>
           <p className="text-xs text-muted-foreground">
             Made with <span className="text-primary">♥</span> in{" "}
             <a href="https://rovno.dev" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-foreground transition-colors">

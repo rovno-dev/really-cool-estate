@@ -1,4 +1,5 @@
 "use client";
+import { Container } from "../ui/container";
 import { PropertyCard, PropertyListing } from "./property-card";
 import { useLanguage } from "@/providers/language-provider";
 
@@ -16,7 +17,7 @@ export function PropertyGrid({ properties, title, subtitle, limit, showViewAll =
 
   return (
     <section className="py-16 bg-(--bg)">
-      <div className="mx-auto max-w-7xl px-4">
+      <Container>
         {title && (
           <div className="mb-10">
             <h2 className="text-display-2 font-semibold">{title}</h2>
@@ -35,7 +36,7 @@ export function PropertyGrid({ properties, title, subtitle, limit, showViewAll =
             </a>
           </div>
         )}
-      </div>
+      </Container>
     </section>
   );
 }

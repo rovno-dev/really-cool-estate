@@ -17,7 +17,7 @@ export default function ClientRootLayout({
   return (
     <>
       <Header />
-      <main className={cn(pathname == '/' ? "mt-0" : "mt-0", "mb-0")}>
+      <main className={cn(pathname == '/' ? "mt-0" : "mt-[0px] lg:mt-[96px]", "mb-0")}>
         {children}
       </main>
       <Footer />

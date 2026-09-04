@@ -21,13 +21,12 @@ export default function Header() {
     { label: t("nav.home"), href: "/" },
     { label: t("nav.properties"), href: "/search" },
     { label: t("nav.mortgage"), href: "/mortgage" },
-    { label: t("nav.about"), href: "/about" },
   ], [lang, t]);
 
-  const secondaryNavItems = useMemo(() => [
-    { label: t("nav.contact"), href: "/contacts" },
-    { label: t("nav.news"), href: "/news" },
-  ], [lang, t]);
+  // const secondaryNavItems = useMemo(() => [
+  //   { label: t("nav.contact"), href: "/contacts" },
+  //   { label: t("nav.news"), href: "/news" },
+  // ], [lang, t]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -75,8 +74,8 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          <CitySwitcher />
-          <LanguageSwitcher />
+          <CitySwitcher className="hidden sm:flex" />
+          <LanguageSwitcher className="hidden sm:flex" />
           <RequestDialog>
             <Button size="small" shape="round" className="hidden sm:flex bg-primary text-primary-foreground">
               {t("nav.make_request")}
@@ -93,7 +92,7 @@ export default function Header() {
           </Button>
         </div>
       </Container>
-      <div className="hidden lg:flex">
+      {/* <div className="hidden lg:flex">
         <Container className="flex items-center justify-end gap-6 py-2">
           {secondaryNavItems.map((item) => (
             <Link
@@ -108,31 +107,33 @@ export default function Header() {
             </Link>
           ))}
         </Container>
-      </div>
+      </div> */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 top-16 bg-background h-[calc(100vh-4rem)] overflow-y-auto">
           <Container className="py-6">
             <div className="w-full">
-              <nav className="flex flex-col">
+              <div className="flex items-center gap-2">
+                <CitySwitcher className="flex sm:hidden" />
+                <LanguageSwitcher className="flex sm:hidden" />
+              </div>
+              <nav className="flex flex-col mt-4 gap-1">
                 {navItems.map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      "flex w-full items-center justify-end px-4 py-4 border-b border-border/50 transition-colors",
-                      isActive(item.href) ? "text-primary bg-primary/5" : "text-foreground/80 hover:bg-muted/50"
-                    )}
+                      (isActive(item.href) ? "text-primary" : "text-foreground/80 hover:bg-muted/50"), "text-body-2")}
                     style={{
                       animation: "menu-item-in 0.3s ease forwards",
                       animationDelay: `${index * 40}ms`,
-                      opacity: 0,
+                      // opacity: 0,
                     }}
                   >
                     {item.label}
                   </Link>
                 ))}
-                {secondaryNavItems.map((item, index) => (
+                {/* {secondaryNavItems.map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -149,9 +150,9 @@ export default function Header() {
                   >
                     {item.label}
                   </Link>
-                ))}
+                ))} */}
               </nav>
-              <div className="flex justify-end p-4 mt-4">
+              <div className="flex justify-end mt-16">
                 <RequestDialog>
                   <Button size="large" shape="round" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
                     {t("nav.make_request")}

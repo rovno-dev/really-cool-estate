@@ -11,8 +11,7 @@ import { useCity } from "@/providers/city-provider";
 import { getPropertiesByCity } from "@/utils/constants/properties";
 import { cities } from "@/utils/constants/cities";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRightIcon, BuildingIcon, KeyIcon, PercentIcon, ShieldIcon, TrophyIcon, UsersIcon } from "@phosphor-icons/react";
+import { ArrowRight, BuildingIcon, KeyIcon, PercentIcon, ShieldIcon, TrophyIcon, UsersIcon } from "@phosphor-icons/react";
 
 export default function Home() {
   const { lang, t } = useLanguage();
@@ -74,7 +73,7 @@ export default function Home() {
             <Button size="large" shape="round" asChild>
               <Link href="#properties">
                 {lang === "ru" ? "Смотреть объекты" : "View Properties"}
-                <ArrowRightIcon size={16} weight="bold" />
+                <ArrowRight size={16} weight="bold" />
               </Link>
             </Button>
             <Button variant="outlined" size="large" shape="round" asChild>
@@ -91,8 +90,8 @@ export default function Home() {
 
       {/* SEARCH */}
       <section className="relative z-20 -mt-16 px-4">
-        <Container>
-          <PropertySearch />
+        <Container className="max-w-5xl">
+          <PropertySearch heroImage="/images/sochi-apartments-1.png" />
         </Container>
       </section>
 
@@ -178,20 +177,13 @@ export default function Home() {
                 href={`/cities/${c.slug}`}
                 className="group relative rounded-2xl overflow-hidden aspect-[4/3] border border-(--outline) hover:border-primary/40 transition-all"
               >
-                {c.image && (
-                  <Image
-                    src={c.image.src}
-                    fill
-                    alt={c.image.alt ?? "image"}
-                  />
-                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <h3 className="text-heading-3 font-semibold text-white">{c.name[lang]}</h3>
                   <p className="text-sm text-white/70 mt-1">{c.propertiesCount} {lang === "ru" ? "объектов" : "properties"}</p>
                 </div>
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRightIcon className="size-5 text-white" />
+                  <ArrowRight className="size-5 text-white" />
                 </div>
               </Link>
             ))}
@@ -213,7 +205,7 @@ export default function Home() {
             </p>
             <Button variant="tonal-card" size="large" shape="round" className="mt-8">
               {lang === "ru" ? "Оставить заявку" : "Leave a Request"}
-              <ArrowRightIcon size={16} weight="bold" />
+              <ArrowRight size={16} weight="bold" />
             </Button>
           </div>
         </Container>

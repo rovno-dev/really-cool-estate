@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -13,19 +14,23 @@ import {
 } from "@/components/ui/select";
 import { useLanguage } from "@/providers/language-provider";
 import { useCity } from "@/providers/city-provider";
-import { MagnifyingGlassIcon, SlidersIcon, XIcon } from "@phosphor-icons/react";
+import { MagnifyingGlassIcon, SlidersIcon, XIcon, CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { cities } from "@/utils/constants/cities";
 
 interface PropertySearchProps {
-  showReset?: boolean;
+  heroImage?: string;
+  compact?: boolean;
 }
 
-export function PropertySearch({ showReset = true }: PropertySearchProps) {
+export function PropertySearch({ heroImage, compact = false }: PropertySearchProps) {
   const { lang, t } = useLanguage();
   const router = useRouter();
   const { city } = useCity();
 
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
+  // Basic filters
   const [query, setQuery] = useState("");
   const [selectedCity, setSelectedCity] = useState<string>(city?.slug || "");
   const [district, setDistrict] = useState<string>("all");
@@ -33,6 +38,8 @@ export function PropertySearch({ showReset = true }: PropertySearchProps) {
   const [developer, setDeveloper] = useState<string>("all");
   const [bedrooms, setBedrooms] = useState<string>("all");
   const [bathrooms, setBathrooms] = useState<string>("all");
+
+  // Advanced filters
   const [minArea, setMinArea] = useState<string>("");
   const [maxArea, setMaxArea] = useState<string>("");
   const [minPrice, setMinPrice] = useState<string>("");
@@ -45,7 +52,6 @@ export function PropertySearch({ showReset = true }: PropertySearchProps) {
   const [furnished, setFurnished] = useState(false);
   const [mortgage, setMortgage] = useState(false);
 
-  // Sync city with context
   useEffect(() => {
     setSelectedCity(city?.slug || "");
     setDistrict("all");
@@ -107,199 +113,250 @@ export function PropertySearch({ showReset = true }: PropertySearchProps) {
   };
 
   return (
-    <div className="bg-(--card) border border-(--outline) rounded-2xl p-4 shadow-lg">
-      {/* Row 1: Basic search */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-3">
-        <Input
-          placeholder={t("search.searchPlaceholder")}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="h-12 md:col-span-2 lg:col-span-2"
-        />
-        <Select value={selectedCity} onValueChange={setSelectedCity}>
-          <SelectTrigger className="h-12">
-            <SelectValue placeholder={t("search.allCities")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("search.allCities")}</SelectItem>
-            {cities.map((c) => (
-              <SelectItem key={c.slug} value={c.slug}>
-                {c.name[lang]}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={district} onValueChange={setDistrict}>
-          <SelectTrigger className="h-12">
-            <SelectValue placeholder={lang === "ru" ? "Все районы" : "All districts"} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{lang === "ru" ? "Все районы" : "All districts"}</SelectItem>
-            {districts.map((d) => (
-              <SelectItem key={d.ru} value={d.en}>
-                {d[lang]}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={type} onValueChange={setType}>
-          <SelectTrigger className="h-12">
-            <SelectValue placeholder={t("search.allTypes")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("search.allTypes")}</SelectItem>
-            <SelectItem value="apartment">{t("search.apartment")}</SelectItem>
-            <SelectItem value="house">{t("search.house")}</SelectItem>
-            <SelectItem value="townhouse">{t("search.townhouse")}</SelectItem>
-            <SelectItem value="commercial">{t("search.commercial")}</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={developer} onValueChange={setDeveloper}>
-          <SelectTrigger className="h-12">
-            <SelectValue placeholder={lang === "ru" ? "Застройщик" : "Developer"} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{lang === "ru" ? "Любой застройщик" : "Any developer"}</SelectItem>
-            {developers.map((d) => (
-              <SelectItem key={d.value} value={d.value}>
-                {d.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+    <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+      {/* Background image with overlay */}
+      {heroImage && (
+        <div className="absolute inset-0">
+          <Image
+            src={heroImage}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30" />
+        </div>
+      )}
 
-      {/* Row 2: Rooms & Area */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-3 mt-3">
-        <Select value={bedrooms} onValueChange={setBedrooms}>
-          <SelectTrigger className="h-12">
-            <SelectValue placeholder={t("search.allBedrooms")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("search.allBedrooms")}</SelectItem>
-            <SelectItem value="1">1</SelectItem>
-            <SelectItem value="2">2</SelectItem>
-            <SelectItem value="3">3</SelectItem>
-            <SelectItem value="4">4+</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={bathrooms} onValueChange={setBathrooms}>
-          <SelectTrigger className="h-12">
-            <SelectValue placeholder={t("search.allBathrooms")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("search.allBathrooms")}</SelectItem>
-            <SelectItem value="1">1</SelectItem>
-            <SelectItem value="2">2</SelectItem>
-            <SelectItem value="3">3+</SelectItem>
-          </SelectContent>
-        </Select>
-        <div className="flex gap-2 col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2">
-          <Input
-            type="number"
-            placeholder={t("search.minArea")}
-            value={minArea}
-            onChange={(e) => setMinArea(e.target.value)}
-            className="h-12"
-          />
-          <Input
-            type="number"
-            placeholder={t("search.maxArea")}
-            value={maxArea}
-            onChange={(e) => setMaxArea(e.target.value)}
-            className="h-12"
-          />
+      {/* Form card */}
+      <div className="relative bg-background/95 backdrop-blur-lg p-6 md:p-8">
+        {/* Header */}
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-heading-3 font-semibold">{t("search.title")}</h2>
+          <button
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className="flex items-center gap-1 text-sm text-primary hover:underline"
+          >
+            {showAdvanced ? t("search.hideAdvanced") : t("search.showAdvanced")}
+            <CaretDownIcon className={cn("size-4 transition-transform", showAdvanced && "rotate-180")} />
+          </button>
         </div>
-        <div className="flex gap-2 col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2">
-          <Input
-            type="number"
-            placeholder={t("search.minPrice")}
-            value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
-            className="h-12"
-          />
-          <Input
-            type="number"
-            placeholder={t("search.maxPrice")}
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-            className="h-12"
-          />
-        </div>
-      </div>
 
-      {/* Row 3: Floor, Year, Options */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-3 mt-3">
-        <div className="flex gap-2 col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2">
+        {/* Basic search row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           <Input
-            type="number"
-            placeholder={lang === "ru" ? "Этаж от" : "Floor from"}
-            value={minFloor}
-            onChange={(e) => setMinFloor(e.target.value)}
-            className="h-12"
+            placeholder={t("search.searchPlaceholder")}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="h-10 md:col-span-2 lg:col-span-2"
           />
-          <Input
-            type="number"
-            placeholder={lang === "ru" ? "Этаж до" : "Floor to"}
-            value={maxFloor}
-            onChange={(e) => setMaxFloor(e.target.value)}
-            className="h-12"
-          />
+          <Select value={selectedCity} onValueChange={setSelectedCity}>
+            <SelectTrigger className="h-14 w-full">
+              <SelectValue placeholder={t("search.allCities")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t("search.allCities")}</SelectItem>
+              {cities.map((c) => (
+                <SelectItem key={c.slug} value={c.slug}>
+                  {c.name[lang]}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={type} onValueChange={setType}>
+            <SelectTrigger className="h-14 w-full">
+              <SelectValue placeholder={t("search.allTypes")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t("search.allTypes")}</SelectItem>
+              <SelectItem value="apartment">{t("search.apartment")}</SelectItem>
+              <SelectItem value="house">{t("search.house")}</SelectItem>
+              <SelectItem value="townhouse">{t("search.townhouse")}</SelectItem>
+              <SelectItem value="commercial">{t("search.commercial")}</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        <div className="flex gap-2 col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2">
-          <Input
-            type="number"
-            placeholder={lang === "ru" ? "Год от" : "Year from"}
-            value={yearFrom}
-            onChange={(e) => setYearFrom(e.target.value)}
-            className="h-12"
-          />
-          <Input
-            type="number"
-            placeholder={lang === "ru" ? "Год до" : "Year to"}
-            value={yearTo}
-            onChange={(e) => setYearTo(e.target.value)}
-            className="h-12"
-          />
-        </div>
-        <div className="flex items-center gap-2 col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2">
-          <label className="flex items-center gap-2 text-sm">
-            <Checkbox
-              checked={parking}
-              onCheckedChange={(checked) => setParking(checked === true)}
-            />
-            {lang === "ru" ? "Парковка" : "Parking"}
-          </label>
-          <label className="flex items-center gap-2 text-sm">
-            <Checkbox
-              checked={furnished}
-              onCheckedChange={(checked) => setFurnished(checked === true)}
-            />
-            {lang === "ru" ? "Мебель" : "Furnished"}
-          </label>
-          <label className="flex items-center gap-2 text-sm">
-            <Checkbox
-              checked={mortgage}
-              onCheckedChange={(checked) => setMortgage(checked === true)}
-            />
-            {lang === "ru" ? "Ипотека" : "Mortgage"}
-          </label>
-        </div>
-      </div>
 
-      {/* Buttons */}
-      {showReset && (
-        <div className="mt-4 flex flex-col sm:flex-row justify-end gap-2">
-          <Button variant="text" size="medium" onClick={resetFilters} className="sm:mr-2">
+        {/* Quick filters row (always visible) */}
+        <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3">
+          <Select value={district} onValueChange={setDistrict}>
+            <SelectTrigger className="h-14 w-full">
+              <SelectValue placeholder={t("search.allDistricts")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t("search.allDistricts")}</SelectItem>
+              {districts.map((d) => (
+                <SelectItem key={d.ru} value={d.en}>
+                  {d[lang]}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={bedrooms} onValueChange={setBedrooms}>
+            <SelectTrigger className="h-14 w-full">
+              <SelectValue placeholder={t("search.allBedrooms")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t("search.allBedrooms")}</SelectItem>
+              <SelectItem value="1">1</SelectItem>
+              <SelectItem value="2">2</SelectItem>
+              <SelectItem value="3">3</SelectItem>
+              <SelectItem value="4">4+</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={bathrooms} onValueChange={setBathrooms}>
+            <SelectTrigger className="h-14 w-full">
+              <SelectValue placeholder={t("search.allBathrooms")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t("search.allBathrooms")}</SelectItem>
+              <SelectItem value="1">1</SelectItem>
+              <SelectItem value="2">2</SelectItem>
+              <SelectItem value="3">3+</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={developer} onValueChange={setDeveloper}>
+            <SelectTrigger className="h-14 w-full">
+              <SelectValue placeholder={t("search.allDevelopers")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t("search.allDevelopers")}</SelectItem>
+              {developers.map((d) => (
+                <SelectItem key={d.value} value={d.value}>
+                  {d.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Advanced filters section */}
+        {showAdvanced && (
+          <div className="mt-4 pt-4 border-t border-border/50 animate-in fade-in slide-in-from-top-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Area */}
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                  {t("search.minArea")} — {t("search.maxArea")}
+                </label>
+                <div className="flex gap-2">
+                  <Input
+                    type="number"
+                    placeholder={t("search.minArea")}
+                    value={minArea}
+                    onChange={(e) => setMinArea(e.target.value)}
+                    className="h-10"
+                  />
+                  <Input
+                    type="number"
+                    placeholder={t("search.maxArea")}
+                    value={maxArea}
+                    onChange={(e) => setMaxArea(e.target.value)}
+                    className="h-10"
+                  />
+                </div>
+              </div>
+
+              {/* Price */}
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                  {t("search.minPrice")} — {t("search.maxPrice")}
+                </label>
+                <div className="flex gap-2">
+                  <Input
+                    type="number"
+                    placeholder={t("search.minPrice")}
+                    value={minPrice}
+                    onChange={(e) => setMinPrice(e.target.value)}
+                    className="h-10"
+                  />
+                  <Input
+                    type="number"
+                    placeholder={t("search.maxPrice")}
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                    className="h-10"
+                  />
+                </div>
+              </div>
+
+              {/* Floor */}
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                  {t("search.minFloor")} — {t("search.maxFloor")}
+                </label>
+                <div className="flex gap-2">
+                  <Input
+                    type="number"
+                    placeholder={t("search.minFloor")}
+                    value={minFloor}
+                    onChange={(e) => setMinFloor(e.target.value)}
+                    className="h-10"
+                  />
+                  <Input
+                    type="number"
+                    placeholder={t("search.maxFloor")}
+                    value={maxFloor}
+                    onChange={(e) => setMaxFloor(e.target.value)}
+                    className="h-10"
+                  />
+                </div>
+              </div>
+
+              {/* Year built */}
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                  {t("search.yearFrom")} — {t("search.yearTo")}
+                </label>
+                <div className="flex gap-2">
+                  <Input
+                    type="number"
+                    placeholder={t("search.yearFrom")}
+                    value={yearFrom}
+                    onChange={(e) => setYearFrom(e.target.value)}
+                    className="h-10"
+                  />
+                  <Input
+                    type="number"
+                    placeholder={t("search.yearTo")}
+                    value={yearTo}
+                    onChange={(e) => setYearTo(e.target.value)}
+                    className="h-10"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Amenities */}
+            <div className="mt-4 flex flex-wrap gap-6">
+              <label className="flex items-center gap-2 text-sm">
+                <Checkbox checked={parking} onCheckedChange={(c) => setParking(c === true)} />
+                {t("search.parking")}
+              </label>
+              <label className="flex items-center gap-2 text-sm">
+                <Checkbox checked={furnished} onCheckedChange={(c) => setFurnished(c === true)} />
+                {t("search.furnished")}
+              </label>
+              <label className="flex items-center gap-2 text-sm">
+                <Checkbox checked={mortgage} onCheckedChange={(c) => setMortgage(c === true)} />
+                {t("search.mortgage")}
+              </label>
+            </div>
+          </div>
+        )}
+
+        {/* Actions */}
+        <div className="mt-6 flex flex-col sm:flex-row justify-end gap-3">
+          <Button variant="text" size="medium" onClick={resetFilters}>
             <XIcon className="size-4" />
             {t("search.reset")}
           </Button>
-          <Button size="large" shape="round" onClick={handleSearch} className="sm:w-auto">
+          <Button size="large" shape="round" onClick={handleSearch} className="sm:min-w-40">
             <MagnifyingGlassIcon className="size-5" />
             {t("search.submit")}
           </Button>
         </div>
-      )}
+      </div>
     </div>
   );
 }

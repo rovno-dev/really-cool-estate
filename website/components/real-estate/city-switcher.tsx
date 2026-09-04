@@ -6,10 +6,14 @@ import { useLanguage } from "@/providers/language-provider";
 import { MapPinIcon, CheckIcon, CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
-export function CitySwitcher() {
+export interface CitySwitcherProps {
+  className?: string;
+}
+
+export function CitySwitcher({ className }: CitySwitcherProps) {
   const { city, setCityBySlug, cities, isLoading } = useCity();
   const { lang } = useLanguage();
-  
+
   const cityName = useMemo(() => {
     if (!city || isLoading) return "";
     return city.name[lang];
@@ -17,7 +21,7 @@ export function CitySwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className={className}>
         <button
           className="flex items-center gap-1.5 rounded-full border border-(--outline) bg-(--card) px-3 h-9 text-sm font-medium transition-all hover:border-(--primary)/50 hover:shadow-sm cursor-pointer focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           aria-label="Select city"

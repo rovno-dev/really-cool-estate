@@ -55,14 +55,14 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
 
   return (
     <Link href={`/properties/${property.slug}`} className="block group">
-      <Card className={cn("overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1", className)}>
+      <Card className={cn("overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1, pt-0!", className)}>
         <div className="relative aspect-[4/3] overflow-hidden">
           <Image
             src={property.image}
             alt={property.title[lang]}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute top-3 left-3 flex gap-2">
             <Badge variant="glass-static" className="!bg-white/80 !text-slate-900">
