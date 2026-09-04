@@ -4,23 +4,19 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils";
 import localFont from 'next/font/local'
 import { ThemeProvider } from "@/providers/theme-provider";
+import { LanguageProvider } from "@/providers/language-provider";
+import { CityProvider } from "@/providers/city-provider";
 import UserProvider from "@/entities/user/model/user-context";
 import ClientRootLayout from "./client-layout";
 
-// Import fonts locally here
 export const Geist = localFont({
   src: '../public/fonts/Geist-VariableFont_wght.woff2',
   variable: '--font-sans',
 });
 
-// export const OtherLocalFont = localFont({
-//   src: '../public/fonts/OtherLocalFont.woff2',
-//   variable: '--font-heading',
-// });
-
 export const metadata: Metadata = {
-  title: "Amorfa app",
-  description: "Amorfa application",
+  title: "Realty Pro — Real Estate Agency",
+  description: "Find your perfect apartment in Russia. 500+ verified properties across 4 cities.",
 };
 
 export default function RootLayout({
@@ -29,11 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={cn(Geist.className, "font-sans")}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={cn(Geist.className, "font-sans")} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -54,15 +46,19 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider>
-          <UserProvider>
-            <TooltipProvider>
-              <ClientRootLayout>
-                {children}
-              </ClientRootLayout>
-            </TooltipProvider>
-          </UserProvider>
-        </ThemeProvider>
+        <LanguageProvider>
+          <CityProvider>
+            <ThemeProvider>
+              <UserProvider>
+                <TooltipProvider>
+                  <ClientRootLayout>
+                    {children}
+                  </ClientRootLayout>
+                </TooltipProvider>
+              </UserProvider>
+            </ThemeProvider>
+          </CityProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

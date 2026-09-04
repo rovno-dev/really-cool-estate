@@ -1,0 +1,38 @@
+export type Language = "en" | "ru";
+
+export const translations: Record<Language, Record<string, string>> = {
+  en: {
+    "nav.home": "Home",
+    "nav.properties": "Properties",
+    "nav.mortgage": "Mortgage",
+    "nav.about": "About",
+    "nav.contact": "Contact",
+    "nav.make_request": "Make a Request",
+    "footer.about": "About us",
+    "footer.contact": "Contact",
+    "footer.privacy": "Privacy Policy",
+    "footer.terms": "Terms of Service",
+    "footer.properties": "Properties",
+    "footer.mortgage": "Mortgage",
+    "footer.news": "News",
+    "header.language_label": "Language",
+    "header.city_label": "City",
+  },
+  ru: {
+    "nav.home": "Главная",
+    "nav.properties": "Объекты",
+    "nav.mortgage": "Ипотека",
+    "nav.about": "О нас",
+    "nav.contact": "Контакты",
+    "nav.make_request": "Оставить заявку",
+    "footer.about": "О нас",
+    "footer.contact": "Контакты",
+    "footer.privacy": "Политика конфиденциальности",
+    "footer.terms": "Условия использования",
+    "footer.properties": "Объекты",
+    "footer.mortgage": "Ипотека",
+    "footer.news": "Новости",
+    "header.language_label": "Язык",
+    "header.city_label": "Город",
+  },
+};
