@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { useUser } from "@/entities/user/model/user-context";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { LogOut, User, Settings, BriefcaseBusiness } from "lucide-react";
+import { SignOut, User, Gear, Briefcase } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
 export function ProfileSidebar() {
@@ -23,8 +23,8 @@ export function ProfileSidebar() {
   // TODO: move to the app. subdomain
   const navItems = [
     { label: "Профиль", href: `/app/profile`, icon: User },
-    { label: "Настройки", href: `/app/profile/settings`, icon: Settings },
-    { label: "Безопасность", href: `/app/profile/security`, icon: BriefcaseBusiness },
+    { label: "Настройки", href: `/app/profile/Gear`, icon: Gear },
+    { label: "Безопасность", href: `/app/profile/security`, icon: Briefcase },
   ];
 
   const handleLogout = async () => {
@@ -61,7 +61,7 @@ export function ProfileSidebar() {
           onClick={handleLogout}
           className="flex w-full items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-(--on-bg-medium) hover:bg-(--state-hover)"
         >
-          <LogOut className="size-5 shrink-0" />
+          <SignOut className="size-5 shrink-0" />
           <span className="text-sm">Выйти</span>
         </button>
       </nav>

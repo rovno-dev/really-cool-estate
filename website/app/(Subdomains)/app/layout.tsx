@@ -7,14 +7,13 @@ export const metadata: Metadata = {
   description: "Admin panel",
 };
 export default function AdminRootLayout({
-  children, params
+  children
 }: {
   children: React.ReactNode;
-  params: Promise<{ secret: string }>
 }) {
   return (
     <CheckUser>
-      <ProfileRootClientLayout params={params} >
+      <ProfileRootClientLayout>
         {children}
       </ProfileRootClientLayout>
     </CheckUser>

@@ -12,12 +12,12 @@ export default async function AdminRootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ secret: string }>;
+  params: Promise<{ secret?: string }>;
 }) {
   const { secret } = await params;
   return (
     <CheckUser>
-      <AdminRootClientLayout secret={secret}>
+      <AdminRootClientLayout secret={secret ?? ""}>
         {children}
       </AdminRootClientLayout>
     </CheckUser>

@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { ReactNode, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
-import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
+import { SidebarIcon, LayoutIcon } from "@phosphor-icons/react";
 
 export interface SidebarItem {
   label: string;
@@ -84,7 +84,7 @@ export function Sidebar({
             onClick={() => setIsCollapsed(!isCollapsed)}
             className={cn(isCollapsed ? "mx-auto" : "ml-4")}
           >
-            {isCollapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}
+            {isCollapsed ? <SidebarIcon className="size-4" /> : <LayoutIcon className="size-4" />}
           </Button>
         )}
       </div>

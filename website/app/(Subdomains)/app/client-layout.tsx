@@ -3,10 +3,9 @@ import { ProfileSidebar } from "./_components/profile-sidebar";
 import { Container } from "@/components/ui/container";
 
 export default function ProfileRootClientLayout({
-  children, params
+  children
 }: {
   children: React.ReactNode;
-  params: Promise<{ secret: string }>
 }) {
   return (
     <div className="min-h-screen bg-(--bg) py-12 md:py-16">
