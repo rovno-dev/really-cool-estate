@@ -47,7 +47,7 @@ export function CitySwitcher({ className }: CitySwitcherProps) {
           >
             <span className="flex items-center gap-2.5">
               <span className="text-sm font-medium">{c.name[lang]}</span>
-              <span className="text-xs text-muted-foreground">{c.region[lang]}</span>
+              {/* <span className="text-xs text-muted-foreground">{c.region[lang]}</span> */}
             </span>
             {city?.slug === c.slug && <CheckIcon className="size-4" />}
           </DropdownMenuItem>

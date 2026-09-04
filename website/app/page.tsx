@@ -124,7 +124,7 @@ export default function Home() {
       <div id="properties">
         <PropertyGrid
           properties={cityProperties.length > 0 ? cityProperties : getPropertiesByCity("moscow")}
-          title={lang === "ru" ? `Новостройки в ${city.name.ru}` : `New Buildings in ${city.name.en}`}
+          title={lang === "ru" ? `Новостройки в г. ${city.name.ru}` : `New Buildings in ${city.name.en}`}
           subtitle={lang === "ru" ? "Специальные условия для покупателей" : "Special conditions for buyers"}
           limit={8}
           showViewAll={true}

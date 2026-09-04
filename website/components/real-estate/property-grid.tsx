@@ -20,7 +20,7 @@ export function PropertyGrid({ properties, title, subtitle, limit, showViewAll =
       <Container>
         {title && (
           <div className="mb-10">
-            <h2 className="text-display-2 font-semibold">{title}</h2>
+            <h2 className="text-display-3 sm:text-display-2 font-semibold">{title}</h2>
             {subtitle && <p className="mt-2 text-body-3 text-muted-foreground">{subtitle}</p>}
           </div>
         )}

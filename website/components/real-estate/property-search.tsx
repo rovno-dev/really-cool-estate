@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { useLanguage } from "@/providers/language-provider";
 import { useCity } from "@/providers/city-provider";
-import { MagnifyingGlassIcon, SlidersIcon, XIcon, CaretDownIcon } from "@phosphor-icons/react";
+import { MagnifyingGlassIcon, XIcon, CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { cities } from "@/utils/constants/cities";
 
@@ -26,13 +26,18 @@ interface PropertySearchProps {
 export function PropertySearch({ heroImage, compact = false }: PropertySearchProps) {
   const { lang, t } = useLanguage();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { city } = useCity();
-
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [hasInitialized, setHasInitialized] = useState(false);
+  const firstRender = useRef(true);
 
   // Basic filters
   const [query, setQuery] = useState("");
-  const [selectedCity, setSelectedCity] = useState<string>(city?.slug || "");
+  const [selectedCity, setSelectedCity] = useState<string>(() => {
+    const urlCity = searchParams.get("city");
+    return urlCity || city?.slug || "moscow";
+  });
   const [district, setDistrict] = useState<string>("all");
   const [type, setType] = useState<string>("all");
   const [developer, setDeveloper] = useState<string>("all");
@@ -53,9 +58,37 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
   const [mortgage, setMortgage] = useState(false);
 
   useEffect(() => {
-    setSelectedCity(city?.slug || "");
-    setDistrict("all");
-  }, [city]);
+    setHasInitialized(true);
+  }, []);
+
+  // Update selectedCity when city context changes, but only after initial load
+  useEffect(() => {
+    if (hasInitialized && city) {
+      setSelectedCity(city.slug);
+      setDistrict("all");
+    }
+  }, [city, hasInitialized]);
+
+  // Sync selectedCity to the URL query parameter (skip first render)
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    const currentCityParam = searchParams.get("city");
+    if (selectedCity && selectedCity !== "all") {
+      if (currentCityParam !== selectedCity) {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("city", selectedCity);
+        router.replace(`?${params.toString()}`, { scroll: false });
+      }
+    } else if (selectedCity === "all" && currentCityParam) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("city");
+      router.replace(`?${params.toString()}`, { scroll: false });
+    }
+  }, [selectedCity, searchParams, router]);
 
   const developers = [
     { value: "pik", label: lang === "ru" ? "ПИК" : "PIK" },
@@ -64,12 +97,11 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
     { value: "lSR", label: lang === "ru" ? "ЛСР" : "LSR" },
     { value: "other", label: lang === "ru" ? "Другой" : "Other" },
   ];
-
   const districts = city ? city.neighborhoods : [];
 
   const resetFilters = () => {
     setQuery("");
-    setSelectedCity(city?.slug || "");
+    setSelectedCity(city?.slug || "moscow");
     setDistrict("all");
     setType("all");
     setDeveloper("all");
@@ -108,7 +140,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
     if (parking) params.set("parking", "true");
     if (furnished) params.set("furnished", "true");
     if (mortgage) params.set("mortgage", "true");
-
     router.push(`/search?${params.toString()}`);
   };
 
@@ -127,7 +158,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30" />
         </div>
       )}
-
       {/* Form card */}
       <div className="relative bg-background/95 backdrop-blur-lg p-6 md:p-8">
         {/* Header */}
@@ -141,7 +171,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
             <CaretDownIcon className={cn("size-4 transition-transform", showAdvanced && "rotate-180")} />
           </button>
         </div>
-
         {/* Basic search row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           <Input
@@ -176,7 +205,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
             </SelectContent>
           </Select>
         </div>
-
         {/* Quick filters row (always visible) */}
         <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3">
           <Select value={district} onValueChange={setDistrict}>
@@ -229,7 +257,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
             </SelectContent>
           </Select>
         </div>
-
         {/* Advanced filters section */}
         {showAdvanced && (
           <div className="mt-4 pt-4 border-t border-border/50 animate-in fade-in slide-in-from-top-2">
@@ -256,7 +283,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
                   />
                 </div>
               </div>
-
               {/* Price */}
               <div>
                 <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
@@ -279,7 +305,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
                   />
                 </div>
               </div>
-
               {/* Floor */}
               <div>
                 <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
@@ -302,7 +327,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
                   />
                 </div>
               </div>
-
               {/* Year built */}
               <div>
                 <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
@@ -326,7 +350,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
                 </div>
               </div>
             </div>
-
             {/* Amenities */}
             <div className="mt-4 flex flex-wrap gap-6">
               <label className="flex items-center gap-2 text-sm">
@@ -344,7 +367,6 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
             </div>
           </div>
         )}
-
         {/* Actions */}
         <div className="mt-6 flex flex-col sm:flex-row justify-end gap-3">
           <Button variant="text" size="medium" onClick={resetFilters}>
