@@ -9,12 +9,12 @@
 
 :root {
   --primary: var(--brand-9);
-  --primary-gradient: linear-gradient(180deg, var(--brand-8), var(--brand-9));
+  --primary-gradient: linear-gradient(180deg, var(--brand-7), var(--brand-8));
   --on-primary: var(--white);
   --primary-card: var(--brand-0);
   --on-primary-card: var(--gray-9);
 
-  --outline: var(--gray-3);
+  --outline: var(--gray-2);
   --bg: var(--gray-0);
   --bg-disabled: var(--gray-3);
   --on-bg-disabled: var(--gray-6);
@@ -494,10 +494,16 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
 /* City illustration spinning animation */
 @keyframes city-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-city-spin {

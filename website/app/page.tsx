@@ -50,10 +50,9 @@ export default function Home() {
         </div>
       </ScrollReveal>
 
-      {/* CITY STATS */}
-      <ScrollReveal delay={600}>
+      {/* <ScrollReveal delay={600}>
         <CityStatsSection />
-      </ScrollReveal>
+      </ScrollReveal> */}
 
       {/* CITIES GRID */}
       <ScrollReveal delay={750}>

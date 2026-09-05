@@ -14,7 +14,7 @@ export default function CtaSection() {
   const { city } = useCity();
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary to-primary/80">
+    <section className="py-20">
       <Container>
         <div className="text-center text-on-primary">
           <h2 className="text-display-2 font-semibold">
@@ -25,7 +25,7 @@ export default function CtaSection() {
               ? "Оставьте заявку — подберём варианты под ваш бюджет за 1 день"
               : "Leave a request — we'll find options for your budget in 1 day"}
           </p>
-          <Button variant="tonal-card" size="large" shape="round" className="mt-8">
+          <Button variant="glass" size="large" shape="round" className="mt-8">
             {lang === "ru" ? "Оставить заявку" : "Leave a Request"}
             <ArrowRightIcon size={16} weight="bold" />
           </Button>

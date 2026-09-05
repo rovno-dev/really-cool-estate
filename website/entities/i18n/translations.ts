@@ -55,8 +55,8 @@ export const translations: Record<Language, Record<string, string>> = {
     "search.submit": "Search",
     "search.found": "Properties found",
     "search.advanced": "Advanced filters",
-    "search.hideAdvanced": "Hide advanced",
-    "search.showAdvanced": "Show advanced",
+    "search.hideAdvanced": "Less settings",
+    "search.showAdvanced": "More settings",
   },
   ru: {
     "nav.home": "Главная",
@@ -112,7 +112,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "search.submit": "Найти",
     "search.found": "объектов найдено",
     "search.advanced": "Расширенные фильтры",
-    "search.hideAdvanced": "Скрыть расширенные",
-    "search.showAdvanced": "Показать расширенные",
+    "search.hideAdvanced": "Меньше настроек",
+    "search.showAdvanced": "Больше настроек",
   },
 };

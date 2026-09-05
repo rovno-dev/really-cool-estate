@@ -16,7 +16,7 @@ export function PropertyGrid({ properties, title, subtitle, limit, showViewAll =
   const filtered = limit ? properties.slice(0, limit) : properties;
 
   return (
-    <section className="py-16 bg-(--bg)">
+    <section className="py-12 bg-(--bg)">
       <Container>
         {title && (
           <div className="mb-10">

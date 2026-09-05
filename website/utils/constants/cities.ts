@@ -29,8 +29,8 @@ export const cities: City[] = [
       ru: "Столица России с самым динамичным рынком недвижимости. От элитных жилых комплексов до доступного семейного жилья."
     },
     image: {
-      src: "/images/moscow.webp",
-      alt: "https://view-photo.ru/foto-zimnej-moskvy-raznyh-let/",
+      src: "/images/moscow-flag.svg",
+      alt: "image",
     },
     video: "/videos/moscow.webm",
     propertiesCount: 250,
@@ -57,8 +57,8 @@ export const cities: City[] = [
       ru: "Курортная столица России. Премиальная недвижимость у моря и инвестиционные возможности."
     },
     image: {
-      src: "/images/sochi.webp",
-      alt: "https://www.pravda.ru/news/travel/2384446-sochi-crimea-group-travel-trends/",
+      src: "/images/sochi-flag.svg",
+      alt: "image",
     },
     video: "/videos/sochi.webm",
     propertiesCount: 60,
@@ -83,8 +83,8 @@ export const cities: City[] = [
       ru: "Культурная столица России. Уникальная архитектура, престижные адреса и современные жилые комплексы."
     },
     image: {
-      src: "/images/spb.webp",
-      alt: "https://www.pravda.ru/news/travel/2343061-petersburg-tours-2026-guide/",
+      src: "/images/spb-flag.svg",
+      alt: "image",
     },
     video: "/videos/spb.webm",
     propertiesCount: 150,
@@ -110,8 +110,8 @@ export const cities: City[] = [
       ru: "Столица Татарстана — быстрорастущий город с отличной инфраструктурой и доступным жильём."
     },
     image: {
-      src: "/images/kazan.webp",
-      alt: "https://www.moneytimes.ru/articles/kazan-city-guide/115644/",
+      src: "/images/kazan-flag.svg",
+      alt: "image",
     },
     video: "/videos/kazan.webm",
     propertiesCount: 80,

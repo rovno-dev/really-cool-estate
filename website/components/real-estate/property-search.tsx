@@ -161,7 +161,7 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
       {/* Form card */}
       <div className="relative bg-background/95 backdrop-blur-lg p-6 md:p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex items-center justify-between gap-2">
           <h2 className="text-heading-3 font-semibold">{t("search.title")}</h2>
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
