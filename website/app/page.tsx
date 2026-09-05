@@ -25,9 +25,9 @@ export default function Home() {
       </ScrollReveal>
 
       <ScrollReveal delay={150}>
-        <section className="relative z-20 -mt-16">
+        <section className="relative z-20 -mt-16 pb-10">
           <Container className="max-w-5xl">
-            <PropertySearch heroImage="/images/sochi-apartments-1.png" />
+            <PropertySearch heroImage="" />
           </Container>
         </section>
       </ScrollReveal>

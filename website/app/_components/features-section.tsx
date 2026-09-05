@@ -1,108 +1,130 @@
+// website/app/_components/features-section.tsx
 "use client"
 import { Container } from "@/components/ui/container";
-import { useCity } from "@/providers/city-provider";
 import { useLanguage } from "@/providers/language-provider";
 import { AssetCard } from "./asset-card";
 
+const featuresData = [
+  {
+    metric: {
+      value: "120+",
+      label: {
+        en: "CURATED",
+        ru: "ОТОБРАНО"
+      }
+    },
+    title: {
+      en: "We handpick every listing",
+      ru: "Мы вручную отбираем каждое объявление"
+    },
+    description: {
+      en: "No filler. Only places we’d live in ourselves. You get a shortlist that fits your life, not a database dump.",
+      ru: "Никакого спама. Только места, где мы жили бы сами. Вы получаете подборку, которая подходит для вашей жизни, а не выгрузку из базы данных."
+    },
+    actionText: {
+      en: "Explore",
+      ru: "Исследовать"
+    },
+    accentColor: "var(--primary)",
+    gridSpanClass: "lg:col-span-3", // 3/6 width
+  },
+  {
+    metric: {
+      value: "3.5%",
+      label: {
+        en: "RATE",
+        ru: "СТАВКА"
+      }
+    },
+    title: {
+      en: "You get the best rate",
+      ru: "Вы получаете лучшую ставку"
+    },
+    description: {
+      en: "We talk to the banks so you don’t have to. Your mortgage comes with the lowest numbers we can find.",
+      ru: "Мы сами ведем переговоры с банками. Ваша ипотека будет одобрена на самых выгодных условиях, которые мы сможем найти."
+    },
+    actionText: {
+      en: "Simulate",
+      ru: "Рассчитать"
+    },
+    accentColor: "var(--success)",
+    gridSpanClass: "lg:col-span-2", // 2/6 width
+  },
+  {
+    metric: {
+      value: "0.0%",
+      label: {
+        en: "RISK",
+        ru: "РИСК"
+      }
+    },
+    title: {
+      en: "We handle the legal stuff",
+      ru: "Мы берем на себя юридические вопросы"
+    },
+    description: {
+      en: "Contracts, inspections, title checks – all taken care of. You just sign where we tell you.",
+      ru: "Договоры, проверки, экспертиза прав собственности — обо всем уже позаботились. Вам останется только поставить подпись."
+    },
+    actionText: {
+      en: "Learn more",
+      ru: "Узнать больше"
+    },
+    accentColor: "var(--warning)",
+    gridSpanClass: "lg:col-span-1", // 1/6 width
+  },
+
+];
+
 export default function FeaturesSection() {
   const { lang } = useLanguage();
-  const { city } = useCity();
 
   return (
-    <section className="py-18 bg-[var(--bg)] transition-colors duration-300 relative overflow-hidden">
-      {/* Abstract background grid */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary-glass)] via-transparent to-transparent pointer-events-none" />
-      <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[var(--primary)]/5 blur-3xl pointer-events-none" />
-      
+    <section className="relative py-18 bg-[var(--bg)] transition-colors duration-300 overflow-hidden">
+      {/* Abstract map background */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,var(--primary)/10,transparent_50%)]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_80%_70%,var(--primary)/5,transparent_50%)]" />
+        {/* Stylized map lines */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1600 800" fill="none" preserveAspectRatio="none">
+          <path d="M0 200 Q400 150, 800 250 T1600 200" stroke="var(--primary)" strokeWidth="0.5" opacity="0.3" />
+          <path d="M0 500 Q400 550, 800 450 T1600 500" stroke="var(--primary)" strokeWidth="0.5" opacity="0.2" />
+          <path d="M400 0 Q450 400, 350 800" stroke="var(--primary)" strokeWidth="0.5" opacity="0.3" />
+          <circle cx="800" cy="200" r="4" fill="var(--primary)" opacity="0.4" />
+          <circle cx="200" cy="500" r="3" fill="var(--primary)" opacity="0.3" />
+          <circle cx="1200" cy="450" r="5" fill="var(--primary)" opacity="0.5" />
+          <circle cx="1400" cy="150" r="3" fill="var(--primary)" opacity="0.2" />
+        </svg>
+      </div>
+
       <Container className="relative z-10">
-        {/* Editorial Header - Short, bold */}
-        <div className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        {/* Header */}
+        <div className="mb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-[var(--primary)] mb-4 block">
-              // {lang === "ru" ? "Экосистема" : "Ecosystem"}
-            </span>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--on-bg-high)] leading-[0.95]">
-              {lang === "ru" ? "Всё в одном" : "One system."}
+              {lang === "ru" ? "Без суеты." : "No fuss."}
               <br />
-              <span className="text-[var(--primary)]">{lang === "ru" ? "Без компромиссов." : "No compromises."}</span>
+              <span className="text-[var(--primary)]">{lang === "ru" ? "Просто решение." : "Just results."}</span>
             </h2>
-          </div>
-          <div className="lg:col-span-4 lg:pb-2">
-            <p className="text-lg font-light text-[var(--on-bg-medium)]">
-              {lang === "ru" ? "Селекция. Финансы. Право." : "Selection. Finance. Law."}
-            </p>
           </div>
         </div>
 
-        {/* Cards Grid - Short copy, strong hierarchy */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          {/* CARD 01 */}
-          <AssetCard
-            indexLabel="01 / 03"
-            gridSpanClass="lg:col-span-3 bg-gradient-to-br from-[var(--card)] to-[var(--card)]/60"
-            actionText={lang === "ru" ? "Каталог" : "Catalogue"}
-            title={lang === "ru" ? "Селекция" : "Curation"}
-            badgeContent={
-              <div className="relative">
-                <span className="text-8xl font-black tracking-tighter text-[var(--primary)]/10 absolute -top-8 left-0">01</span>
-                <div className="relative">
-                  <span className="block text-5xl font-bold tracking-tight text-[var(--on-bg-high)]">120+</span>
-                  <span className="text-xs uppercase font-mono tracking-wider text-[var(--primary)]">
-                    {lang === "ru" ? `Резиденций в г. ${city.name.ru}` : `Residences in ${city.name.en}`}
-                  </span>
-                </div>
-              </div>
-            }
-            description={
-              lang === "ru"
-                ? "Только проверенные лоты."
-                : "Only vetted lots."
-            }
-          />
-          {/* CARD 02 */}
-          <AssetCard
-            indexLabel="02 / 03"
-            gridSpanClass="lg:col-span-2 bg-[var(--card)]"
-            actionText={lang === "ru" ? "Модель" : "Model"}
-            title={lang === "ru" ? "Финансы" : "Leverage"}
-            badgeContent={
-              <div className="relative">
-                <span className="text-8xl font-black tracking-tighter text-[var(--primary)]/10 absolute -top-8 left-0">02</span>
-                <div className="relative">
-                  <span className="block text-5xl font-bold tracking-tight text-[var(--on-bg-high)]">3.5%</span>
-                  <span className="text-xs uppercase font-mono tracking-wider text-[var(--on-bg-low)]">Floor rate</span>
-                </div>
-              </div>
-            }
-            description={
-              lang === "ru"
-                ? "Ставка ниже рынка."
-                : "Below market."
-            }
-          />
-          {/* CARD 03 - Full width with gradient */}
-          <AssetCard
-            indexLabel="03 / 03"
-            gridSpanClass="lg:col-span-5 bg-gradient-to-br from-[var(--card)] via-[var(--card)] to-[var(--primary-glass)]"
-            actionText={lang === "ru" ? "Протокол" : "Protocol"}
-            title={lang === "ru" ? "Право" : "Compliance"}
-            badgeContent={
-              <div className="relative">
-                <span className="text-8xl font-black tracking-tighter text-[var(--primary)]/10 absolute -top-8 left-0">03</span>
-                <div className="relative">
-                  <span className="block text-5xl font-bold tracking-tight text-[var(--on-bg-high)]">0.0%</span>
-                  <span className="text-xs uppercase font-mono tracking-wider text-[var(--success)]">Risk</span>
-                </div>
-              </div>
-            }
-            description={
-              lang === "ru"
-                ? "Абсолютная чистота сделки."
-                : "Absolute purity."
-            }
-          />
+        {/* Cards from array */}
+        <div className="grid grid-cols-1 lg:grid-cols-[4fr_3fr_2fr] gap-6">
+          {featuresData.map((feature, i) => (
+            <AssetCard
+              key={i}
+              metric={{ value: feature.metric.value, label: feature.metric.label[lang] }}
+              title={feature.title[lang]}
+              description={feature.description[lang]}
+              actionText={feature.actionText[lang]}
+              accentColor={feature.accentColor}
+            // gridSpanClass={feature.gridSpanClass}
+            />
+          ))}
         </div>
       </Container>
     </section>
-  )
+  );
 }

@@ -155,7 +155,7 @@ export function PropertySearch({ heroImage, compact = false }: PropertySearchPro
             className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30" />
+          <div className="absolute inset-0" />
         </div>
       )}
       {/* Form card */}
