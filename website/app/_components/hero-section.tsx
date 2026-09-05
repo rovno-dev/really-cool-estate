@@ -14,11 +14,12 @@ export default function HeroSection() {
 
   return (
     <section className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Content - Mobile: Overlay center, Desktop: Shift right */}
-      <Container className="relative z-10 text-center lg:text-left lg:ml-auto lg:max-w-xl">
-        <div className="absolute top-0 flex items-center justify-center lg:right-0 lg:pl-16 pointer-events-none">
+      <div className="absolute bottom-0 flex items-center justify-center lg:justify-end overflow-visible pointer-events-none z-0">
+        <div className="relative w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] lg:w-[600px] lg:h-[600px] flex items-center justify-center lg:translate-x-[40%] xl:translate-x-[35%]">
           <SpinningCityIllustrations />
         </div>
+      </div>
+      <Container className="relative z-10 text-center lg:text-left lg:ml-auto lg:max-w-xl">
         <div>
           <Badge variant="glass-static" className="mb-6 text-sm tracking-wider px-4 py-2">
             {lang === "ru" ? "Недвижимость в г. " + city.name.ru : "Real Estate in " + city.name.en}
