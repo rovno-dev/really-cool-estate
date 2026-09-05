@@ -11,25 +11,20 @@ import {
 import { useLanguage } from "@/providers/language-provider";
 import { GlobeIcon, CheckIcon, CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
-
 export interface LanguageSwitcherProps {
   className?: string;
 }
-
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const { lang, setLang } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
-
   useEffect(() => {
     setMounted(true);
   }, []);
-
   const handleSelect = (newLang: "en" | "ru") => {
     setLang(newLang);
     setOpen(false);
   };
-
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild className={className}>
@@ -46,7 +41,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
           <CaretDownIcon className="size-3 text-(--on-bg-low) transition-transform duration-200 group-data-[state=open]:rotate-180" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-44 p-1.5">
+      <DropdownMenuContent align="end" side="bottom" sideOffset={8} className="w-44 p-1.5 z-[100]">
         <DropdownMenuLabel className="text-[11px] uppercase tracking-wider text-(--on-bg-low) px-2 py-1.5">
           {lang === "en" ? "Language" : "Язык"}
         </DropdownMenuLabel>

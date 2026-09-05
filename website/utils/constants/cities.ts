@@ -49,29 +49,28 @@ export const cities: City[] = [
   },
   {
     id: "2",
-    slug: "kazan",
-    name: { en: "Kazan", ru: "Казань" },
-    region: { en: "Tatarstan", ru: "Татарстан" },
+    slug: "sochi",
+    name: { en: "Sochi", ru: "Сочи" },
+    region: { en: "Krasnodar Krai", ru: "Краснодарский край" },
     description: {
-      en: "The capital of Tatarstan — a fast-growing city with excellent infrastructure and affordable housing.",
-      ru: "Столица Татарстана — быстрорастущий город с отличной инфраструктурой и доступным жильём."
+      en: "The resort capital of Russia. Premium seaside properties and investment opportunities.",
+      ru: "Курортная столица России. Премиальная недвижимость у моря и инвестиционные возможности."
     },
     image: {
-      src: "/images/kazan.webp",
-      alt: "https://www.moneytimes.ru/articles/kazan-city-guide/115644/",
+      src: "/images/sochi.webp",
+      alt: "https://www.pravda.ru/news/travel/2384446-sochi-crimea-group-travel-trends/",
     },
-    video: "/videos/kazan.webm",
-    propertiesCount: 80,
+    video: "/videos/sochi.webm",
+    propertiesCount: 60,
     neighborhoods: [
-      { en: "Vakhitovsky", ru: "Вахитовский" },
-      { en: "Sovetsky", ru: "Советский" },
-      { en: "Novo-Savinovsky", ru: "Ново-Савиновский" },
-      { en: "Moskovsky", ru: "Московский" }
+      { en: "Central", ru: "Центральный" },
+      { en: "Adlersky", ru: "Адлерский" },
+      { en: "Khostinsky", ru: "Хостинский" }
     ],
     stats: {
-      avgPricePerSqm: { en: "₽180K", ru: "₽180K" },
-      newBuildings: 45,
-      population: 1_250_000
+      avgPricePerSqm: { en: "₽320K", ru: "₽320K" },
+      newBuildings: 35,
+      population: 450_000
     }
   },
   {
@@ -103,30 +102,31 @@ export const cities: City[] = [
   },
   {
     id: "4",
-    slug: "sochi",
-    name: { en: "Sochi", ru: "Сочи" },
-    region: { en: "Krasnodar Krai", ru: "Краснодарский край" },
+    slug: "kazan",
+    name: { en: "Kazan", ru: "Казань" },
+    region: { en: "Tatarstan", ru: "Татарстан" },
     description: {
-      en: "The resort capital of Russia. Premium seaside properties and investment opportunities.",
-      ru: "Курортная столица России. Премиальная недвижимость у моря и инвестиционные возможности."
+      en: "The capital of Tatarstan — a fast-growing city with excellent infrastructure and affordable housing.",
+      ru: "Столица Татарстана — быстрорастущий город с отличной инфраструктурой и доступным жильём."
     },
     image: {
-      src: "/images/sochi.webp",
-      alt: "https://www.pravda.ru/news/travel/2384446-sochi-crimea-group-travel-trends/",
+      src: "/images/kazan.webp",
+      alt: "https://www.moneytimes.ru/articles/kazan-city-guide/115644/",
     },
-    video: "/videos/sochi.webm",
-    propertiesCount: 60,
+    video: "/videos/kazan.webm",
+    propertiesCount: 80,
     neighborhoods: [
-      { en: "Central", ru: "Центральный" },
-      { en: "Adlersky", ru: "Адлерский" },
-      { en: "Khostinsky", ru: "Хостинский" }
+      { en: "Vakhitovsky", ru: "Вахитовский" },
+      { en: "Sovetsky", ru: "Советский" },
+      { en: "Novo-Savinovsky", ru: "Ново-Савиновский" },
+      { en: "Moskovsky", ru: "Московский" }
     ],
     stats: {
-      avgPricePerSqm: { en: "₽320K", ru: "₽320K" },
-      newBuildings: 35,
-      population: 450_000
+      avgPricePerSqm: { en: "₽180K", ru: "₽180K" },
+      newBuildings: 45,
+      population: 1_250_000
     }
-  }
+  },
 ];
 
 export function getCityBySlug(slug: string): City | undefined {

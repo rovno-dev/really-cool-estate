@@ -494,3 +494,12 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+/* City illustration spinning animation */
+@keyframes city-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-city-spin {
+  animation: city-spin 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
