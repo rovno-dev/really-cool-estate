@@ -13,7 +13,7 @@ export default function HeroSection() {
   const { city } = useCity();
 
   return (
-    <section className="relative py-12 pb-24 lg:py-36 flex items-center justify-center overflow-hidden">
+    <section className="relative py-16 pb-24 lg:py-40 flex items-center justify-center overflow-hidden">
       <div className="absolute -bottom-[50%] md:inset-0 flex items-center justify-center lg:justify-end overflow-visible pointer-events-none z-0">
         <div className="relative w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] lg:w-[600px] lg:h-[600px] flex items-center justify-center lg:translate-x-[60%] xl:translate-x-[60%] 2xl:translate-x-[20%]">
           <SpinningCityIllustrations />
