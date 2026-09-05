@@ -39,7 +39,7 @@ export default function CityPage() {
   const properties = getPropertiesByCity(city.slug);
 
   return (
-    <main className="overflow-x-hidden">
+    <>
       {/* City Hero */}
       <section className="relative h-[70svh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-bg to-bg" />
@@ -76,20 +76,22 @@ export default function CityPage() {
       </section>
 
       {/* Neighborhoods */}
-      <section className="py-16 bg-(--bg)">
-        <Container>
-          <h2 className="text-display-3 font-semibold mb-8">
-            {lang === "ru" ? "Районы" : "Neighborhoods"}
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {city.neighborhoods.map((neighborhood) => (
-              <Badge key={neighborhood.ru} variant="tonal-static" className="px-4 py-2 text-sm">
-                {neighborhood[lang]}
-              </Badge>
-            ))}
-          </div>
-        </Container>
-      </section>
+      {city.neighborhoods && (
+        <section className="py-16 bg-(--bg)">
+          <Container>
+            <h2 className="text-display-3 font-semibold mb-8">
+              {lang === "ru" ? "Районы" : "Neighborhoods"}
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {city.neighborhoods.map((neighborhood) => (
+                <Badge key={neighborhood.ru} variant="tonal-static" className="px-4 py-2 text-sm">
+                  {neighborhood[lang]}
+                </Badge>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Properties */}
       <PropertyGrid
@@ -97,6 +99,6 @@ export default function CityPage() {
         title={lang === "ru" ? `Объекты в ${city.name.ru}` : `Properties in ${city.name.en}`}
         subtitle={lang === "ru" ? "Все объекты с проверенными документами" : "All properties with verified documents"}
       />
-    </main>
+    </>
   );
 }
