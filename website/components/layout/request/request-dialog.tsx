@@ -112,7 +112,7 @@ export function RequestDialog({ children, propertyId, propertyTitle }: RequestDi
             <FieldLabel>{t("request.phone")} *</FieldLabel>
             <PhoneInputField
               value={phone}
-              onChange={setPhone}
+              onChange={(value) => setPhone(value || "")}
               error={errors.phone}
             />
           </Field>

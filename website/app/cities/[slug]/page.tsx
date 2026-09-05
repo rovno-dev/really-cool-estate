@@ -8,7 +8,7 @@ import { PropertyGrid } from "@/components/real-estate/property-grid";
 import { PropertySearch } from "@/components/real-estate/property-search";
 import { useLanguage } from "@/providers/language-provider";
 import { useCity } from "@/providers/city-provider";
-import { getCityBySlug } from "@/utils/constants/cities";
+import { getCityBySlug, type City } from "@/utils/constants/cities";
 import { getPropertiesByCity } from "@/utils/constants/properties";
 import { ScrollReveal } from "@/components/layout/animation/scroll-reveal";
 import { ArrowRight } from "@phosphor-icons/react";
@@ -18,7 +18,7 @@ export default function CityPage() {
   const slug = params.slug as string;
   const { lang } = useLanguage();
   const { setCityBySlug } = useCity();
-  const [city, setCity] = useState<any>(null);
+  const [city, setCity] = useState<City | null>(null);
 
   useEffect(() => {
     const found = getCityBySlug(slug);
