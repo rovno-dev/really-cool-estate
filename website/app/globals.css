@@ -39,9 +39,9 @@
   --warning-card: var(--orange-0);
   --on-warning-card: var(--orange-7);
 
-  --primary-glass: color-mix(in srgb, var(--primary), transparent 95%);
+  --primary-glass: color-mix(in srgb, var(--primary), transparent 98%);
   --on-primary-glass: var(--primary);
-  --card-glass: color-mix(in srgb, var(--card), transparent 95%);
+  --card-glass: color-mix(in srgb, var(--card), transparent 98%);
   --outline-primary-glass: conic-gradient(from 180deg at 50% 50%,
       var(--primary) 0%,
       color-mix(in srgb, var(--primary), transparent 80%) 25%,
