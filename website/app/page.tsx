@@ -51,12 +51,20 @@ export default function Home() {
       {/* HERO */}
       <ScrollReveal delay={0}>
         <section className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden">
-          <div className="top-1/2 left-1/2 absolute flex items-center gap-2">
-            <Image className="w-48" width={1200} height={1200} src={"/images/kazan-illustration.png"} alt={"illustration"} />
-            <Image className="w-48" width={1200} height={1200} src={"/images/moscow-illustration.png"} alt={"illustration"} />
-            <Image className="w-48" width={1200} height={1200} src={"/images/spb-illustration.png"} alt={"illustration"} />
-            <Image className="w-48" width={1200} height={1200} src={"/images/sochi-illustration.png"} alt={"illustration"} />
+          <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[10%] left-[5%] rotate-[-12deg] opacity-70 hover:opacity-100 transition-opacity">
+            <Image className="w-40 md:w-56" width={1200} height={1200} src={"/images/kazan-illustration.png"} alt={"illustration"} />
           </div>
+          <div className="absolute bottom-[10%] left-[10%] rotate-[8deg] opacity-70 hover:opacity-100 transition-opacity">
+            <Image className="w-40 md:w-56" width={1200} height={1200} src={"/images/moscow-illustration.png"} alt={"illustration"} />
+          </div>
+          <div className="absolute top-[10%] right-[8%] rotate-[15deg] opacity-70 hover:opacity-100 transition-opacity">
+            <Image className="w-40 md:w-56" width={1200} height={1200} src={"/images/spb-illustration.png"} alt={"illustration"} />
+          </div>
+          <div className="absolute bottom-[15%] right-[5%] rotate-[-6deg] opacity-70 hover:opacity-100 transition-opacity">
+            <Image className="w-40 md:w-56" width={1200} height={1200} src={"/images/sochi-illustration.png"} alt={"illustration"} />
+          </div>
+        </div>
           <Container className="relative z-10 text-center">
             <Badge variant="glass-static" className="mb-6 text-sm tracking-wider px-4 py-2">
               {lang === "ru" ? "Недвижимость в г. " + city.name.ru : "Real Estate in " + city.name.en}
