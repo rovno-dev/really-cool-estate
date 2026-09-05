@@ -13,18 +13,18 @@ export default function HeroSection() {
   const { city } = useCity();
 
   return (
-    <section className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden">
-      <div className="absolute bottom-0 flex items-center justify-center lg:justify-end overflow-visible pointer-events-none z-0">
-        <div className="relative w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] lg:w-[600px] lg:h-[600px] flex items-center justify-center lg:translate-x-[40%] xl:translate-x-[35%]">
+    <section className="relative py-12 pb-24 lg:py-36 flex items-center justify-center overflow-hidden">
+      <div className="absolute -bottom-[50%] md:inset-0 flex items-center justify-center lg:justify-end overflow-visible pointer-events-none z-0">
+        <div className="relative w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] lg:w-[600px] lg:h-[600px] flex items-center justify-center lg:translate-x-[60%] xl:translate-x-[60%] 2xl:translate-x-[20%]">
           <SpinningCityIllustrations />
         </div>
       </div>
-      <Container className="relative z-10 text-center lg:text-left lg:ml-auto lg:max-w-xl">
+      <Container className="relative z-10 text-center lg:text-left">
         <div>
           <Badge variant="glass-static" className="mb-6 text-sm tracking-wider px-4 py-2">
             {lang === "ru" ? "Недвижимость в г. " + city.name.ru : "Real Estate in " + city.name.en}
           </Badge>
-          <h1 className="text-display-2 sm:text-display-1 lg:text-[4rem] font-bold leading-[1.05] max-w-3xl mx-auto lg:mx-0">
+          <h1 className="text-display-2 sm:text-display-1 lg:text-[4rem] font-bold! leading-[1.05]">
             {lang === "ru" ? (
               <>Найдите свою<br />идеальную квартиру</>
             ) : (
@@ -36,7 +36,7 @@ export default function HeroSection() {
               ? "Более 500 проверенных объектов в 4 городах России. От студий до пентхаусов."
               : "Over 500 verified properties in 4 cities across Russia. From studios to penthouses."}
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          {/* <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <Button size="large" shape="round" asChild>
               <Link href="#properties">
                 {lang === "ru" ? "Смотреть объекты" : "View Properties"}
@@ -48,7 +48,7 @@ export default function HeroSection() {
                 {lang === "ru" ? "Ипотека от 5мин." : "Mortgage from 5min."}
               </Link>
             </Button>
-          </div>
+          </div> */}
         </div>
       </Container >
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground text-xs tracking-[0.3em] uppercase">

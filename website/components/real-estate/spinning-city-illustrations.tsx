@@ -18,15 +18,11 @@ interface CityItemProps {
   altText: string;
   isActive: boolean;
   rotation: number;
-  // CSS transform classes for standard layout orientation positioning
   positionClasses: string;
-  // Specific transform utility applied uniquely to this city if it is active
   activePositionClasses: string;
-  // The mobile star orientation static fallback rotation
   mobileFallbackClass: string;
 }
 
-// Reusable component for the single city illustration
 function CityItem({
   slug,
   imageSrc,
@@ -39,8 +35,8 @@ function CityItem({
 }: CityItemProps) {
   return (
     <div
-      className={`absolute w-40 h-40 sm:w-56 sm:h-56 lg:w-72 lg:h-72 xl:w-96 xl:h-96 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
-        ${isActive ? `scale-115 ${activePositionClasses}` : positionClasses}
+      className={`hidden lg:block absolute w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-86 xl:h-86 2xl:w-108 2xl:h-108 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+        ${isActive ? `scale-115 ${activePositionClasses} opacity-100 z-20` : `${positionClasses} opacity-30 md:opacity-20 lg:opacity-5 z-10`}
       `}
     >
       <div
@@ -49,8 +45,8 @@ function CityItem({
       >
         <Image
           className="w-full h-full object-contain"
-          width={800}
-          height={800}
+          width={1000}
+          height={1000}
           src={imageSrc}
           alt={altText}
           priority={slug === "moscow"}
@@ -101,8 +97,8 @@ export function SpinningCityIllustrations() {
         altText="Moscow"
         isActive={city.slug === "moscow"}
         rotation={rotation}
-        positionClasses="-translate-y-[150px] sm:-translate-y-[200px] lg:-translate-y-[250px] xl:-translate-y-[290px]"
-        activePositionClasses="-translate-y-[180px] sm:-translate-y-[240px] lg:-translate-y-[300px] xl:-translate-y-[350px]"
+        positionClasses="-translate-y-[130px] sm:-translate-y-[190px] md:-translate-y-[220px] lg:-translate-y-[250px] xl:-translate-y-[290px] 2xl:-translate-y-[350px]"
+        activePositionClasses="-translate-y-[150px] sm:-translate-y-[210px] md:-translate-y-[240px] lg:-translate-y-[270px] xl:-translate-y-[320px] 2xl:-translate-y-[390px]"
         mobileFallbackClass="max-md:!transform-none"
       />
 
@@ -113,8 +109,8 @@ export function SpinningCityIllustrations() {
         altText="Kazan"
         isActive={city.slug === "kazan"}
         rotation={rotation}
-        positionClasses="translate-x-[150px] sm:translate-x-[200px] lg:translate-x-[250px] xl:translate-x-[290px]"
-        activePositionClasses="translate-x-[180px] sm:translate-x-[240px] lg:translate-x-[300px] xl:translate-x-[350px]"
+        positionClasses="translate-x-[130px] sm:translate-x-[190px] md:translate-x-[220px] lg:translate-x-[250px] xl:translate-x-[290px] 2xl:translate-x-[350px]"
+        activePositionClasses="translate-x-[150px] sm:translate-x-[210px] md:translate-x-[240px] lg:translate-x-[270px] xl:translate-x-[320px] 2xl:translate-x-[390px]"
         mobileFallbackClass="max-md:rotate-90"
       />
 
@@ -125,8 +121,8 @@ export function SpinningCityIllustrations() {
         altText="Saint Petersburg"
         isActive={city.slug === "st-petersburg"}
         rotation={rotation}
-        positionClasses="translate-y-[150px] sm:translate-y-[200px] lg:translate-y-[250px] xl:translate-y-[290px]"
-        activePositionClasses="translate-y-[180px] sm:translate-y-[240px] lg:translate-y-[300px] xl:translate-y-[350px]"
+        positionClasses="translate-y-[130px] sm:translate-y-[190px] md:translate-y-[220px] lg:translate-y-[250px] xl:translate-y-[290px] 2xl:translate-y-[350px]"
+        activePositionClasses="translate-y-[150px] sm:translate-y-[210px] md:translate-y-[240px] lg:translate-y-[270px] xl:translate-y-[320px] 2xl:translate-y-[390px]"
         mobileFallbackClass="max-md:rotate-180"
       />
 
@@ -137,8 +133,8 @@ export function SpinningCityIllustrations() {
         altText="Sochi"
         isActive={city.slug === "sochi"}
         rotation={rotation}
-        positionClasses="-translate-x-[150px] sm:-translate-x-[200px] lg:-translate-x-[250px] xl:-translate-x-[290px]"
-        activePositionClasses="-translate-x-[180px] sm:-translate-x-[240px] lg:-translate-x-[300px] xl:-translate-x-[350px]"
+        positionClasses="-translate-x-[130px] sm:-translate-x-[190px] md:-translate-x-[220px] lg:-translate-x-[250px] xl:-translate-x-[290px] 2xl:-translate-x-[350px]"
+        activePositionClasses="-translate-x-[150px] sm:-translate-x-[210px] md:-translate-x-[240px] lg:-translate-x-[270px] xl:-translate-x-[320px] 2xl:-translate-x-[390px]"
         mobileFallbackClass="max-md:-rotate-90"
       />
     </div>
