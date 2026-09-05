@@ -5,6 +5,7 @@ import { useCity } from "@/providers/city-provider";
 import { useLanguage } from "@/providers/language-provider";
 import { MapPinIcon, CheckIcon, CaretDownIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
+import RealisticMapIcon from "../icons/realistic-map-icon";
 
 export interface CitySwitcherProps {
   className?: string;
@@ -23,10 +24,13 @@ export function CitySwitcher({ className }: CitySwitcherProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={className}>
         <button
-          className="flex items-center gap-1.5 rounded-full border border-(--outline) bg-(--card) px-3 h-9 text-sm font-medium transition-all hover:border-(--primary)/50 hover:shadow-sm cursor-pointer focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="flex items-center gap-1.5 rounded-full border border-(--outline) bg-(--card) py-1 pl-1 pr-3 h-9 text-sm font-medium transition-all hover:border-(--primary)/50 hover:shadow-sm cursor-pointer focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           aria-label="Select city"
         >
-          <MapPinIcon className="size-4 text-(--on-bg-low) group-hover:text-(--primary) transition-colors" />
+          {/* <div className="flex h-full items-center justify-center aspect-square rounded-full bg-primary">
+            <MapPinIcon className="size-4 text-(--on-bg-low) group-hover:text-(--primary) transition-colors" />
+          </div> */}
+          <RealisticMapIcon className="h-full w-auto" />
           <span>{cityName || "Select city"}</span>
           <CaretDownIcon className="size-3 text-(--on-bg-low) transition-transform" />
         </button>

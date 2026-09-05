@@ -11,6 +11,7 @@ import { useCity } from "@/providers/city-provider";
 import { getPropertiesByCity } from "@/utils/constants/properties";
 import { cities } from "@/utils/constants/cities";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BuildingIcon, KeyIcon, PercentIcon, ShieldIcon, TrophyIcon, UsersIcon } from "@phosphor-icons/react";
 
 export default function Home() {
@@ -50,10 +51,12 @@ export default function Home() {
       {/* HERO */}
       <ScrollReveal delay={0}>
         <section className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden">
-          {/* Background gradient with subtle pattern */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-bg to-bg" />
-          <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.1)_1px,transparent_1px)] [background-size:60px_60px]" />
-
+          <div className="top-1/2 left-1/2 absolute flex items-center gap-2">
+            <Image className="w-48" width={1200} height={1200} src={"/images/kazan-illustration.png"} alt={"illustration"} />
+            <Image className="w-48" width={1200} height={1200} src={"/images/moscow-illustration.png"} alt={"illustration"} />
+            <Image className="w-48" width={1200} height={1200} src={"/images/spb-illustration.png"} alt={"illustration"} />
+            <Image className="w-48" width={1200} height={1200} src={"/images/sochi-illustration.png"} alt={"illustration"} />
+          </div>
           <Container className="relative z-10 text-center">
             <Badge variant="glass-static" className="mb-6 text-sm tracking-wider px-4 py-2">
               {lang === "ru" ? "Недвижимость в г. " + city.name.ru : "Real Estate in " + city.name.en}
@@ -77,7 +80,7 @@ export default function Home() {
                   <ArrowRight size={16} weight="bold" />
                 </Link>
               </Button>
-              <Button variant="outlined" size="large" shape="round" asChild>
+              <Button variant="glass" size="large" shape="round" asChild>
                 <Link href="/mortgage">
                   {lang === "ru" ? "Ипотека от 5мин." : "Mortgage from 5min."}
                 </Link>
