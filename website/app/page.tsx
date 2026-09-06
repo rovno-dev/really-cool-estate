@@ -20,11 +20,11 @@ export default function Home() {
 
   return (
     <>
-      <ScrollReveal delay={0}>
+      <ScrollReveal>
         <HeroSection />
       </ScrollReveal>
 
-      <ScrollReveal delay={150}>
+      <ScrollReveal>
         <section className="relative z-20 -mt-16 pb-10">
           <Container className="max-w-5xl">
             <PropertySearch heroImage="" />
@@ -33,12 +33,12 @@ export default function Home() {
       </ScrollReveal>
 
       {/* FEATURES */}
-      <ScrollReveal delay={300}>
+      <ScrollReveal>
         <FeaturesSection />
       </ScrollReveal>
 
       {/* PROPERTIES */}
-      <ScrollReveal delay={450}>
+      <ScrollReveal>
         <div id="properties">
           <PropertyGrid
             properties={cityProperties.length > 0 ? cityProperties : getPropertiesByCity("moscow")}
@@ -50,16 +50,16 @@ export default function Home() {
         </div>
       </ScrollReveal>
 
-      {/* <ScrollReveal delay={600}>
+      {/* <ScrollReveal>
         <CityStatsSection />
       </ScrollReveal> */}
 
       {/* CITIES GRID */}
-      <ScrollReveal delay={750}>
+      <ScrollReveal>
         <CitiesGridSection />
       </ScrollReveal>
 
-      <ScrollReveal delay={900}>
+      <ScrollReveal>
         <CtaSection />
       </ScrollReveal>
     </>

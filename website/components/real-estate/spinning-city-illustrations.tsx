@@ -35,7 +35,7 @@ function CityItem({
 }: CityItemProps) {
   return (
     <div
-      className={`hidden lg:block absolute w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-86 xl:h-86 2xl:w-108 2xl:h-108 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+      className={`hidden lg:block absolute w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-68 lg:h-68 xl:w-70 xl:h-70 2xl:w-90 2xl:h-90 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
         ${isActive ? `scale-115 ${activePositionClasses} opacity-100 z-20` : `${positionClasses} opacity-30 md:opacity-20 lg:opacity-5 z-10`}
       `}
     >

@@ -44,7 +44,7 @@ export default function Header() {
       <header className="fixed top-0 left-0 right-0 z-[999] bg-bg/40 backdrop-blur-lg">
         <Container className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center">
-            <Logo className="h-auto w-[8rem]! md:w-[10rem]! xl:w-[12rem]!" />
+            <Logo className="w-auto h-[3rem]! md:w-[6rem]! xl:w-[7rem]!" />
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
             <nav className="hidden items-center gap-4 lg:flex">
